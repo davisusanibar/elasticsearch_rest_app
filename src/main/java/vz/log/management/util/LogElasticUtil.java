@@ -35,9 +35,9 @@ public class LogElasticUtil {
 			.toString(DateTimeFormat.forPattern(formatTime));
 	}
 	
-	static String obtainSourceTimestamp(Map<Object,Object> logElasticRequest){				
+	public static String obtainSourceTimestamp(Map<Object,Object> logElasticRequest){				
 		sourceTimestamp = (logElasticRequest.get("sourceTimestamp")==null)?"":logElasticRequest.get("sourceTimestamp").toString();
-		offsetSourceTimestamp = (logElasticRequest.get("offsetSourceTimestamp")==null)?"":logElasticRequest.get("offsetSourceTimestamp").toString();
+		offsetSourceTimestamp = (logElasticRequest.get("offsetSourceTimestamp")==null)?"0":logElasticRequest.get("offsetSourceTimestamp").toString();
 		
 		//if the user define a date timestamp, then, our app should use that
 		if (!"".equals(sourceTimestamp)) { 

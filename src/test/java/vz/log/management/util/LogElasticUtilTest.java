@@ -1,10 +1,15 @@
 package vz.log.management.util;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import scala.annotation.meta.setter;
 
 public class LogElasticUtilTest {
 	
@@ -47,4 +52,23 @@ public class LogElasticUtilTest {
 	@After
 	public void after() throws Exception {	
 	}
+	
+	@Test
+	public void testMap() throws Exception {
+		Map<Object,Object> logElasticRequest = new HashMap<Object, Object>();
+		
+		//logElasticRequest.put("sourceTimestamp", "2015-06-24 14:24:50");
+		//logElasticRequest.put("offsetSourceTimestamp", "0");
+		
+		String sourceTimestamp = (logElasticRequest.get("sourceTimestamp")==null)?"":logElasticRequest.get("sourceTimestamp").toString();
+		String offsetSourceTimestamp = (logElasticRequest.get("offsetSourceTimestamp")==null)?"0":logElasticRequest.get("offsetSourceTimestamp").toString();
+		
+		
+		System.out.println("sourceTimestamp: "+sourceTimestamp);
+		System.out.println("offsetSourceTimestamp: "+offsetSourceTimestamp);
+		
+		String response = LogElasticUtil.obtainSourceTimestamp(logElasticRequest);
+		
+		System.out.println("response: "+response);
+	}	
 }

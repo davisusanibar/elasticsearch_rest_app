@@ -17,16 +17,14 @@ public class LogElasticServiceImpl implements LogElasticService {
 	private LogElasticRepository repository;
 	
 	private LogElastic logElastic;
-	
-	private String sourceTimestamp = "";
-		
+			
 	@Override
 	public void saveLogElastic(Map<Object,Object> logElasticRequest) {		
-		sourceTimestamp = (logElasticRequest.get("sourceTimestamp")==null)?logElasticRequest.get("sourceTimestamp").toString():"";
 		logElastic = new LogElastic();
-		logElastic.setLogelastic(logElasticRequest);
-		
-		
+		logElastic.setLogelastic(logElasticRequest);						
+		logElastic.setSourceTimestamp(LogElasticUtil.obtainSourceTimestamp(logElasticRequest));
+				
+		repository.save(logElastic);		
 	}
 
 	@Override
